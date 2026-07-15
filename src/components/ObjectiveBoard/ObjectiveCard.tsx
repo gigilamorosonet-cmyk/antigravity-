@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { useDraggable } from '@dnd-kit/core'
-import { motion } from 'framer-motion'
 import { 
   Clock, 
   AlertCircle, 
   CheckCircle2, 
   RefreshCw, 
-  Eye, 
+  Eye,
   Bell,
   Zap
 } from 'lucide-react'
@@ -101,15 +100,11 @@ export const ObjectiveCard: React.FC<ObjectiveCardProps> = ({
   }
 
   return (
-    <motion.div
+    <div
       ref={setNodeRef}
       style={style}
       {...listeners}
       {...attributes}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      whileHover={{ scale: 1.02 }}
       onMouseEnter={() => setShowActions(true)}
       onMouseLeave={() => setShowActions(false)}
       className={clsx(
@@ -171,16 +166,12 @@ export const ObjectiveCard: React.FC<ObjectiveCardProps> = ({
       </div>
 
       {/* Hover Actions */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: showActions ? 1 : 0, y: showActions ? 0 : 10 }}
-        className={clsx(
-          'absolute inset-x-4 bottom-4 glass-dark rounded-lg p-2',
-          'border border-white/10 flex items-center justify-between',
-          'transition-opacity pointer-events-none',
-          showActions ? 'pointer-events-auto' : 'pointer-events-none'
-        )}
-      >
+      <div className={clsx(
+        'absolute inset-x-4 bottom-4 glass-dark rounded-lg p-2',
+        'border border-white/10 flex items-center justify-between',
+        'transition-opacity',
+        showActions ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+      )}>
         <div className="flex items-center gap-1">
           {onRedelegate && (
             <button
@@ -216,7 +207,7 @@ export const ObjectiveCard: React.FC<ObjectiveCardProps> = ({
         <div className="text-xs text-white/40 capitalize">
           {objective.priority} priority
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   )
 }
